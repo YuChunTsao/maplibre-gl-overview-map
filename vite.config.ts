@@ -5,7 +5,7 @@ import dts from "vite-plugin-dts";
 export default ({ mode }) => {
   process.env = Object.assign(process.env, loadEnv(mode, process.cwd(), ""));
 
-  if (process.env.VITE_BUILD_ENV === "library") {
+  if (mode === "lib") {
     // Library Mode
     return defineConfig({
       build: {
@@ -24,18 +24,10 @@ export default ({ mode }) => {
       },
       plugins: [dts()],
     });
-  } else if (process.env.VITE_BUILD_ENV === "production") {
-    // For github page
+  } else {
+    // Deploy to Github Page
     return defineConfig({
       base: "/maplibre-gl-overview-map/",
-      build: {
-        outDir: "dist/example",
-        minify: true,
-      },
-    });
-  } else {
-    return defineConfig({
-      base: "",
       build: {
         outDir: "dist/example",
         minify: true,

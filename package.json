@@ -24,15 +24,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/YuChunTsao/maplibre-gl-overview-map"
   },
   "author": "YuChunTsao",
   "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "build-prod": "tsc && vite build --mode prod",
-    "build-lib": "tsc && vite build --mode lib",
+    "release": "tsc && vite build --mode lib",
     "preview": "vite preview",
     "format": "prettier . --write"
   },
