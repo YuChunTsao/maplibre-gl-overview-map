@@ -15,7 +15,6 @@ export default ({ mode }) => {
           entry: resolve(__dirname, "./src/maplibre-gl-overview-map.ts"),
           name: "maplibre-gl-overview-map",
           fileName: "maplibre-gl-overview-map",
-          formats: ["es", "cjs"],
         },
         rollupOptions: {
           output: {

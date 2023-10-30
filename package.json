@@ -1,18 +1,18 @@
 {
   "name": "maplibre-gl-overview-map",
   "private": false,
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "An overview map plugin for mapligre-gl-js.",
   "license": "MIT",
   "author": "YuChunTsao",
   "type": "module",
-  "main": "./dist/maplibre-gl-overview-map.cjs.js",
-  "module": "./dist/maplibre-gl-overview-map.es.js",
+  "main": "./dist/maplibre-gl-overview-map.umd.cjs",
+  "module": "./dist/maplibre-gl-overview-map.js",
   "types": "./dist/maplibre-gl-overview-map.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/maplibre-gl-overview-map.es.js",
-      "require": "./dist/maplibre-gl-overview-map.cjs.js"
+      "import": "./dist/maplibre-gl-overview-map.js",
+      "require": "./dist/maplibre-gl-overview-map.umd.cjs"
     },
     "./dist/maplibre-gl-overview-map.css": {
       "import": "./dist/maplibre-gl-overview-map.css",

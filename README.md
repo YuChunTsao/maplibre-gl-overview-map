@@ -10,6 +10,9 @@ The plugin is designed to provide users with a high-level spatial perspective wh
 - [Usage](#usage)
 - [Options](#Options)
 - [Customization](#customization)
+- [Development](#Development)
+- [Build](#Build)
+- [License](#License)
 
 ## Installation
 
@@ -20,11 +23,13 @@ npm install maplibre-gl-overview-map
 ## Usage
 
 ```javascript
-import maplibregl from "maplibre-gl";
+import { Map } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
-import OverviewMapControl from "./maplibre-gl-overview-map";
 
-let map = new maplibregl.Map({
+import OverviewMapControl from "maplibre-gl-overview-map";
+import "maplibre-gl-overview-map/dist/maplibre-gl-overview-map.css";
+
+let map = new Map({
   container: "map",
   style: "https://yuchuntsao.github.io/simple-vector-tiles/style.json",
   center: [0, 0],
@@ -64,42 +69,73 @@ map.addControl(new OverviewMapControl());
 ## Customization
 
 ```javascript
-import maplibregl from "maplibre-gl";
+import { Map } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
-import OverviewMapControl from "./maplibre-gl-overview-map";
 
-let map = new maplibregl.Map({
+import OverviewMapControl from "maplibre-gl-overview-map";
+import "maplibre-gl-overview-map/dist/maplibre-gl-overview-map.css";
+
+let map = new Map({
   container: "map",
   style: "https://yuchuntsao.github.io/simple-vector-tiles/style.json",
   center: [0, 0],
   zoom: 4,
 });
 
-map.addControl(
-  new OverviewMapControl({
-    mapContainerId: "custom-overview-map-id",
-    customClassName: classes["custom-overview-map-style"],
-    mapStyle: "https://demotiles.maplibre.org/style.json",
-    zoomOffset: 4,
-    allowRotate: true,
-    box: {
-      sourceName: "Custom Box Source Name",
-      outlineLayerId: "Custom Box Outline Layer Id",
-      fillLayerId: "Custom Box Fill Layer Id",
-      fillStyle: {
-        "fill-color": "#6995FA",
-        "fill-opacity": 0.2,
-      },
-      outlineStyle: {
-        "line-color": "#3E55C5",
-        "line-width": ["interpolate", ["linear"], ["zoom"], 0, 2, 10, 4],
-        "line-dasharray": [2, 2],
-        "line-opacity": 0.7,
+const customOverviewMapControl = new OverviewMapControl({
+  mapContainerId: "custom-overview-map-id",
+  customClassName: "custom-overview-map-style",
+  mapStyle: {
+    version: 8,
+    name: "Natural Earth Vector Tile",
+    metadata: {},
+    center: [0, 0],
+    zoom: 0,
+    bearing: 0,
+    pitch: 0,
+    sources: {
+      tiles: {
+        type: "vector",
+        tiles: [
+          "https://yuchuntsao.github.io/simple-vector-tiles/tiles/{z}/{x}/{y}.pbf",
+        ],
+        maxzoom: 2,
+        minzoom: 0,
       },
     },
-  }),
-  "top-left",
-);
+    layers: [
+      {
+        id: "countries",
+        type: "fill",
+        source: "tiles",
+        "source-layer": "countries",
+        paint: {
+          "fill-color": "rgba(243, 243, 243, 1)",
+          "fill-outline-color": "rgba(195, 195, 195, 0.5)",
+        },
+      },
+    ],
+  },
+  zoomOffset: 4,
+  allowRotate: true,
+  box: {
+    sourceName: "Custom Box Source Name",
+    outlineLayerId: "Custom Box Outline Layer Id",
+    fillLayerId: "Custom Box Fill Layer Id",
+    fillStyle: {
+      "fill-color": "#6995FA",
+      "fill-opacity": 0.2,
+    },
+    outlineStyle: {
+      "line-color": "#3E55C5",
+      "line-width": ["interpolate", ["linear"], ["zoom"], 0, 2, 10, 4],
+      "line-dasharray": [2, 2],
+      "line-opacity": 0.7,
+    },
+  },
+});
+
+map.addControl(customOverviewMapControl, "top-left");
 ```
 
 ## Development
@@ -109,10 +145,18 @@ pnpm install
 pnpm run dev
 ```
 
-## Build package
+## Build
+
+Build library
 
 ```bash
-pnpm run build-lib
+pnpm run release
+```
+
+Build example
+
+```bash
+pnpm run build
 ```
 
 ## License
