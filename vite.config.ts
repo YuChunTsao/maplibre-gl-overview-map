@@ -9,12 +9,13 @@ export default ({ mode }) => {
     // Library Mode
     return defineConfig({
       build: {
-        outDir: "dist/lib",
+        outDir: "dist",
         minify: true,
         lib: {
           entry: resolve(__dirname, "./src/maplibre-gl-overview-map.ts"),
           name: "maplibre-gl-overview-map",
           fileName: "maplibre-gl-overview-map",
+          formats: ["es", "cjs"],
         },
         rollupOptions: {
           output: {
