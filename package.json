@@ -2,6 +2,9 @@
   "name": "maplibre-gl-overview-map",
   "private": false,
   "version": "0.0.0",
+  "description": "A overview map plugin for mapligre-gl-js.",
+  "license": "MIT",
+  "author": "YuChunTsao",
   "type": "module",
   "main": "./dist/lib/maplibre-gl-overview-map.umd.cjs",
   "module": "./dist/lib/maplibre-gl-overview-map.js",
@@ -24,10 +27,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/YuChunTsao/maplibre-gl-overview-map"
+    "url": "https://github.com/YuChunTsao/maplibre-gl-overview-map.git"
   },
-  "author": "YuChunTsao",
-  "license": "MIT",
+  "homepage": "https://github.com/YuChunTsao/maplibre-gl-overview-map",
+  "bugs": {
+    "url": "https://github.com/YuChunTsao/maplibre-gl-overview-map/issues"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

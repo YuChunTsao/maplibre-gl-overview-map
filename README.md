@@ -2,7 +2,7 @@
 
 The plugin is designed to provide users with a high-level spatial perspective when working with Maplibre GL JS. This feature allows you to include a simplified, smaller-scale map alongside your primary map, offering valuable context and aiding in navigation.
 
-[Demo](#github_page)
+[Demo](https://yuchuntsao.github.io/maplibre-gl-overview-map/)
 
 ## Table of Contents
 
