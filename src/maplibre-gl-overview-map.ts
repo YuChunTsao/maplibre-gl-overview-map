@@ -79,6 +79,9 @@ class OverviewMapControl implements IControl {
   private overviewOnMouseMove: Listener | undefined;
   private overviewOnMouseUp: Listener | undefined;
   private overviewOnMouseDown: Listener | undefined;
+  private overviewOnTouchStart: Listener | undefined;
+  private overviewOnTouchEnd: Listener | undefined;
+  private overviewOnTouchMove: Listener | undefined;
 
   constructor(options?: Options) {
     if (options) {
@@ -205,11 +208,18 @@ class OverviewMapControl implements IControl {
     this.overviewOnMouseMove = this._overviewOnMouseMove.bind(this);
     this.overviewOnMouseUp = this._overviewOnMouseUp.bind(this);
     this.overviewOnMouseDown = this._overviewOnMouseDown.bind(this);
+    this.overviewOnTouchStart = this._overviewOnTouchStart.bind(this);
+    this.overviewOnTouchEnd = this._overviewOnMouseUp.bind(this);
+    this.overviewOnTouchMove = this._overviewOnMouseMove.bind(this);
 
     this.overviewMap.on("load", this.overviewOnLoad);
     this.overviewMap.on("mousemove", this.overviewOnMouseMove);
     this.overviewMap.on("mouseup", this.overviewOnMouseUp);
     this.overviewMap.on("mousedown", this.overviewOnMouseDown);
+
+    this.overviewMap.on("touchstart", this.overviewOnTouchStart);
+    this.overviewMap.on("touchend", this.overviewOnTouchEnd);
+    this.overviewMap.on("touchmove", this.overviewOnTouchMove);
   }
 
   _overviewOnLoad(): void {
@@ -229,6 +239,23 @@ class OverviewMapControl implements IControl {
 
     this.initBox();
     this._updateBox();
+  }
+
+  _overviewOnTouchStart(e: MapMouseEvent & Object) {
+    if (this.overviewMap === undefined) {
+      throw new Error("The overview map object is undefined.");
+    }
+
+    let features = this.overviewMap.queryRenderedFeatures(e.point, {
+      layers: [this.box.fillLayerId],
+    });
+
+    this.isOverBox = features.length > 0;
+
+    if (this.isOverBox) {
+      this.isDragging = true;
+      this.previousPoint = e.lngLat;
+    }
   }
 
   _overviewOnMouseDown(e: MapMouseEvent & Object) {
