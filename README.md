@@ -63,22 +63,22 @@ let map = new Map({
 map.addControl(new OverviewMapControl())
 ```
 
-[Live example](https://yuchuntsao.github.io/maplibre-gl-overview-map/) | [code](https://github.com/YuChunTsao/maplibre-gl-overview-map/examples/index.html)
+[Live example](https://yuchuntsao.github.io/maplibre-gl-overview-map/) | [code](examples/index.html)
 
-If you want to customize the overview map control, you can see the [custom example](https://github.com/YuChunTsao/maplibre-gl-overview-map/examples/custom.html) or read the document about [options](#options).
+If you want to customize the overview map control, you can see the [custom example](examples/custom.html) or read the document about [options](#options).
 
 ## Options
 
 All of the following options are optional.
 
-| Attribute       | Type                           | Default                      | Description                                                                                 |
-| --------------- | ------------------------------ | ---------------------------- | ------------------------------------------------------------------------------------------- |
-| mapContainerId  | `string`                       | `'maplibre-gl-overview-map'` | The map id for overview map container.                                                      |
-| mapStyle        | `StyleSpecification \| string` | `''`                         | The style for overview map. If the mapStyle is empty, it will use the style of primary map. |
-| zoomOffset      | `number`                       | `4`                          | The zoom level offset between primary map and overview map.                                 |
-| customClassName | `string`                       | `''`                         | You can specific custom css style for the container of control. See [custom example](#).    |
-| allowRotate     | `Boolean`                      | `true`                       | Allow the overview map can rotate when the primary map rotated.                             |
-| box             | `object`                       | [Box](#box-options)          | The option is a object about the source, layer and style of the box on the overview map.    |
+| Attribute       | Type                           | Default                      | Description                                                                                                 |
+| --------------- | ------------------------------ | ---------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| mapContainerId  | `string`                       | `'maplibre-gl-overview-map'` | The map id for overview map container.                                                                      |
+| mapStyle        | `StyleSpecification \| string` | `''`                         | The style for overview map. If the mapStyle is empty, it will use the style of primary map.                 |
+| zoomOffset      | `number`                       | `4`                          | The zoom level offset between primary map and overview map.                                                 |
+| customClassName | `string`                       | `''`                         | You can specific custom css style for the container of control. See [custom example](examples/custom.html). |
+| allowRotate     | `Boolean`                      | `true`                       | Allow the overview map can rotate when the primary map rotated.                                             |
+| box             | `object`                       | [Box](#box-options)          | The option is a object about the source, layer and style of the box on the overview map.                    |
 
 ### Box Options
 
