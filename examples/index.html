@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>maplibre-gl-overview-map</title>
+    <script src="https://unpkg.com/maplibre-gl/dist/maplibre-gl.js"></script>
+    <script src="https://unpkg.com/maplibre-gl-overview-map@1.0.4/dist/maplibre-gl-overview-map.umd.js"></script>
+    <link
+      href="https://unpkg.com/maplibre-gl/dist/maplibre-gl.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://unpkg.com/maplibre-gl-overview-map@1.0.4/dist/maplibre-gl-overview-map.css"
+      rel="stylesheet"
+    />
+    <style>
+      #map {
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        position: absolute;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      let map = new maplibregl.Map({
+        container: 'map',
+        style: 'https://yuchuntsao.github.io/simple-vector-tiles/style.json',
+        center: [0, 0],
+        zoom: 4
+      })
+
+      map.addControl(new maplibregl.NavigationControl(), 'bottom-right')
+
+      // Default style
+      const defaultOverviewMapControl = new OverviewMapControl()
+      map.addControl(defaultOverviewMapControl)
+    </script>
+  </body>
+</html>
