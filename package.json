@@ -6,13 +6,13 @@
   "license": "MIT",
   "author": "YuChunTsao",
   "type": "module",
-  "main": "./dist/maplibre-gl-overview-map.umd.cjs",
-  "module": "./dist/maplibre-gl-overview-map.js",
+  "main": "./dist/maplibre-gl-overview-map.umd.js",
+  "module": "./dist/maplibre-gl-overview-map.es.js",
   "types": "./dist/maplibre-gl-overview-map.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/maplibre-gl-overview-map.js",
-      "require": "./dist/maplibre-gl-overview-map.umd.cjs"
+      "import": "./dist/maplibre-gl-overview-map.es.js",
+      "require": "./dist/maplibre-gl-overview-map.umd.js"
     },
     "./dist/maplibre-gl-overview-map.css": {
       "import": "./dist/maplibre-gl-overview-map.css",

@@ -14,7 +14,8 @@ export default ({ mode }) => {
         lib: {
           entry: resolve(__dirname, './src/maplibre-gl-overview-map.ts'),
           name: 'OverviewMapControl',
-          fileName: 'maplibre-gl-overview-map'
+          fileName: (format) => `maplibre-gl-overview-map.${format}.js`,
+          formats: ['es', 'umd']
         },
         rollupOptions: {
           output: {
