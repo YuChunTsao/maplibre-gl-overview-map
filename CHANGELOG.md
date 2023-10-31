@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/YuChunTsao/maplibre-gl-overview-map/compare/v1.0.4...v1.0.5) (2023-10-31)
+
+
+### Bug Fixes
+
+* Remove complex example from demo ([db31871](https://github.com/YuChunTsao/maplibre-gl-overview-map/commit/db31871b4e2b94b14b888dbb01fd57e0c9422d64))
+
 ## [1.0.4](https://github.com/YuChunTsao/maplibre-gl-overview-map/compare/v1.0.3...v1.0.4) (2023-10-31)
 
 
