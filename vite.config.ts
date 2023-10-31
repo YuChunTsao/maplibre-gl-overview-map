@@ -13,7 +13,7 @@ export default ({ mode }) => {
         minify: true,
         lib: {
           entry: resolve(__dirname, './src/maplibre-gl-overview-map.ts'),
-          name: 'maplibre-gl-overview-map',
+          name: 'OverviewMapControl',
           fileName: 'maplibre-gl-overview-map'
         },
         rollupOptions: {
