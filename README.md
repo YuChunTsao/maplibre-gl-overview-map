@@ -1,18 +1,21 @@
 # maplibre-gl-overview-map
 
-The plugin is designed to provide users with a high-level spatial perspective when working with Maplibre GL JS. This feature allows you to include a simplified, smaller-scale map alongside your primary map, offering valuable context and aiding in navigation.
+![npm](https://img.shields.io/npm/v/maplibre-gl-overview-map)
+![GitHub](https://img.shields.io/github/license/YuChunTsao/maplibre-gl-overview-map)
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/YuChunTsao/maplibre-gl-overview-map/deploy.yml)
 
-[Demo](https://yuchuntsao.github.io/maplibre-gl-overview-map/)
+The **maplibre-gl-overview-map** plugin is designed to provide users with a high-level spatial perspective when working with Maplibre GL JS. This feature allows you to include a simplified, smaller-scale map alongside your primary map, offering valuable context and aiding in navigation.
+
+[Live example](https://yuchuntsao.github.io/maplibre-gl-overview-map/)
 
 ## Table of Contents
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Options](#Options)
-- [Customization](#customization)
-- [Development](#Development)
-- [Build](#Build)
-- [License](#License)
+- [Options](#options)
+- [Development](#development)
+- [Build](#build)
+- [License](#license)
 
 ## Installation
 
@@ -22,13 +25,34 @@ npm install maplibre-gl-overview-map
 
 ## Usage
 
+### When using modules
+
 ```javascript
 import { Map } from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
 
 import OverviewMapControl from 'maplibre-gl-overview-map'
 import 'maplibre-gl-overview-map/dist/maplibre-gl-overview-map.css'
+```
 
+### When using a CDN
+
+```html
+<script src="https://unpkg.com/maplibre-gl/dist/maplibre-gl.js"></script>
+<script src="https://unpkg.com/maplibre-gl-overview-map@1.0.4/dist/maplibre-gl-overview-map.umd.js"></script>
+<link
+  href="https://unpkg.com/maplibre-gl/dist/maplibre-gl.css"
+  rel="stylesheet"
+/>
+<link
+  href="https://unpkg.com/maplibre-gl-overview-map@1.0.4/dist/maplibre-gl-overview-map.css"
+  rel="stylesheet"
+/>
+```
+
+### Example Usage
+
+```javascript
 let map = new Map({
   container: 'map',
   style: 'https://yuchuntsao.github.io/simple-vector-tiles/style.json',
@@ -39,104 +63,32 @@ let map = new Map({
 map.addControl(new OverviewMapControl())
 ```
 
+[Live example](https://yuchuntsao.github.io/maplibre-gl-overview-map/) | [code](https://github.com/YuChunTsao/maplibre-gl-overview-map/examples/index.html)
+
+If you want to customize the overview map control, you can see the [custom example](https://github.com/YuChunTsao/maplibre-gl-overview-map/examples/custom.html) or read the document about [options](#options).
+
 ## Options
 
-```javascript
-// default options
-{
-  mapContainerId: 'maplibre-gl-overview-map',
-  mapStyle: '',
-  zoomOffset: 4,
-  customClassName: '',
-  allowRotate: true,
-  box: {
-    sourceName: 'maplibre-gl-overview-map-box-source',
-    outlineLayerId: 'maplibre-gl-overview-map-box-outline-layer',
-    fillLayerId: 'maplibre-gl-overview-map-box-fill-layer',
-    fillStyle: {
-    'fill-color': 'red',
-    'fill-opacity': 0.1,
-    },
-    outlineStyle: {
-    'line-color': 'red',
-    'line-width': 1.5,
-    'line-opacity': 0.5,
-    },
-  }
-}
-```
+All of the following options are optional.
 
-## Customization
+| Attribute       | Type                           | Default                      | Description                                                                                 |
+| --------------- | ------------------------------ | ---------------------------- | ------------------------------------------------------------------------------------------- |
+| mapContainerId  | `string`                       | `'maplibre-gl-overview-map'` | The map id for overview map container.                                                      |
+| mapStyle        | `StyleSpecification \| string` | `''`                         | The style for overview map. If the mapStyle is empty, it will use the style of primary map. |
+| zoomOffset      | `number`                       | `4`                          | The zoom level offset between primary map and overview map.                                 |
+| customClassName | `string`                       | `''`                         | You can specific custom css style for the container of control. See [custom example](#).    |
+| allowRotate     | `Boolean`                      | `true`                       | Allow the overview map can rotate when the primary map rotated.                             |
+| box             | `object`                       | [Box](#box-options)          | The option is a object about the source, layer and style of the box on the overview map.    |
 
-```javascript
-import { Map } from 'maplibre-gl'
-import 'maplibre-gl/dist/maplibre-gl.css'
+### Box Options
 
-import OverviewMapControl from 'maplibre-gl-overview-map'
-import 'maplibre-gl-overview-map/dist/maplibre-gl-overview-map.css'
-
-let map = new Map({
-  container: 'map',
-  style: 'https://yuchuntsao.github.io/simple-vector-tiles/style.json',
-  center: [0, 0],
-  zoom: 4
-})
-
-const customOverviewMapControl = new OverviewMapControl({
-  mapContainerId: 'custom-overview-map-id',
-  customClassName: 'custom-overview-map-style',
-  mapStyle: {
-    version: 8,
-    name: 'Natural Earth Vector Tile',
-    metadata: {},
-    center: [0, 0],
-    zoom: 0,
-    bearing: 0,
-    pitch: 0,
-    sources: {
-      tiles: {
-        type: 'vector',
-        tiles: [
-          'https://yuchuntsao.github.io/simple-vector-tiles/tiles/{z}/{x}/{y}.pbf'
-        ],
-        maxzoom: 2,
-        minzoom: 0
-      }
-    },
-    layers: [
-      {
-        id: 'countries',
-        type: 'fill',
-        source: 'tiles',
-        'source-layer': 'countries',
-        paint: {
-          'fill-color': 'rgba(243, 243, 243, 1)',
-          'fill-outline-color': 'rgba(195, 195, 195, 0.5)'
-        }
-      }
-    ]
-  },
-  zoomOffset: 4,
-  allowRotate: true,
-  box: {
-    sourceName: 'Custom Box Source Name',
-    outlineLayerId: 'Custom Box Outline Layer Id',
-    fillLayerId: 'Custom Box Fill Layer Id',
-    fillStyle: {
-      'fill-color': '#6995FA',
-      'fill-opacity': 0.2
-    },
-    outlineStyle: {
-      'line-color': '#3E55C5',
-      'line-width': ['interpolate', ['linear'], ['zoom'], 0, 2, 10, 4],
-      'line-dasharray': [2, 2],
-      'line-opacity': 0.7
-    }
-  }
-})
-
-map.addControl(customOverviewMapControl, 'top-left')
-```
+| Attribute      | Type     | Default                                                       | Description                                                                                                                               |
+| -------------- | -------- | ------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| sourceName     | `string` | `maplibre-gl-overview-map-box-source`                         | The box source name.                                                                                                                      |
+| outlineLayerId | `string` | `maplibre-gl-overview-map-box-outline-layer`                  | The box outline layer id.                                                                                                                 |
+| fillLayerId    | `string` | `maplibre-gl-overview-map-box-fill-layer`                     | The box fill layer id.                                                                                                                    |
+| fillStyle      | `object` | `{'fill-color': 'red','fill-opacity': 0.1}`                   | The style of the fill layer. You can override the default style with [MapLibre Style Spec](https://maplibre.org/maplibre-style-spec/).    |
+| outlineStyle   | `object` | `{'line-color': 'red','line-width': 1.5,'line-opacity': 0.5}` | The style of the outline layer. You can override the default style with [MapLibre Style Spec](https://maplibre.org/maplibre-style-spec/). |
 
 ## Development
 
