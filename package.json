@@ -1,7 +1,7 @@
 {
   "name": "maplibre-gl-overview-map",
   "private": false,
-  "version": "0.0.3",
+  "version": "1.0.2",
   "description": "An overview map plugin for mapligre-gl-js.",
   "license": "MIT",
   "author": "YuChunTsao",
