@@ -23,11 +23,11 @@ class Box {
   public source: GeoJSONSource | undefined
   public feature: GeoJSON.Feature | undefined
 
-  // Below variables user can change the value
+  // You can modify these variables to customize the behavior
   public sourceName: string = 'maplibre-gl-overview-map-box-source'
   public outlineLayerId: string = 'maplibre-gl-overview-map-box-outline-layer'
   public fillLayerId: string = 'maplibre-gl-overview-map-box-fill-layer'
-  // Allow user can use mapbox style to set complex style.
+  // Allow users to use Maplibre Style Spec for setting complex styles.
   public fillStyle: object = {
     'fill-color': 'red',
     'fill-opacity': 0.1
@@ -83,6 +83,7 @@ class OverviewMapControl implements IControl {
   private overviewOnTouchMove: Listener | undefined
 
   constructor(options?: Options) {
+    // If users set options, they will overwrite the default values.
     if (options) {
       Object.assign(this.options, options)
       Object.assign(this.box, this.options.box)
@@ -101,11 +102,11 @@ class OverviewMapControl implements IControl {
   }
 
   initGlobalEvent() {
+    // If users release the mouse button and move outside the overview map container, it will trigger an event to update the map's status.
     document.addEventListener('mouseup', this.detectMouseUpOutside.bind(this))
   }
 
   detectMouseUpOutside() {
-    // If user mouse up and out of overview map container, update overview map and parent map center.
     if (this.isDragging) {
       if (this.overviewMap === undefined) {
         throw new Error('The overview map object is undefined')
@@ -304,7 +305,7 @@ class OverviewMapControl implements IControl {
 
     this.isOverBox = features.length > 0
 
-    // Update cursor style when hover the box layer.
+    // Update the cursor style when hovering over the box layer
     this.updateCursor()
 
     if (this.isDragging) {
@@ -314,11 +315,11 @@ class OverviewMapControl implements IControl {
         this.currentPoint.lat - this.previousPoint.lat
       )
 
-      // update box center
+      // Update the center of the box 
       let newLng = this.box.center.lng + offset.lng
       let newLat = this.box.center.lat + offset.lat
 
-      // Avoid set invalid value for LngLat
+      // Avoid setting invalid values for LngLat
       if (newLat > MAX_LAT) newLat = MAX_LAT
       if (newLat < -MAX_LAT) newLat = -MAX_LAT
       this.box.center = new LngLat(newLng, newLat)
@@ -368,8 +369,8 @@ class OverviewMapControl implements IControl {
     let parentMapZoom = this.parentMap.getZoom()
     let overviewMapZoom = this.overviewMap.getZoom()
 
-    // Use the latitude of overview map to calculate resolution in different zoom level.
-    // Use the same latitude, so we can know the ratio between two map.
+    // Use the latitude of the overview map to calculate resolution in different zoom levels.
+    // Use the same latitude, so we can determine the ratio between the two maps
     let parentMapResolution = this.calculateResolution(
       overviewMapLat,
       parentMapZoom
